@@ -5,7 +5,7 @@
 
 pkgname=android-studio
 pkgver=0.2.5
-pkgrel=2
+pkgrel=3
 _build=130.737825
 _patch=130.782403
 pkgdesc="A new Android development environment based on IntelliJ IDEA."
@@ -69,7 +69,9 @@ package() {
     install -Dm655 artwork/icon_AS_128.png "${pkgdir}/usr/share/pixmaps/${pkgname}.png"
     install -Dm655 "${srcdir}/${pkgname}.desktop" "${pkgdir}/usr/share/applications/${pkgname}.desktop"
 
+    # Fix permissions
     chmod -R ugo+rX "${pkgdir}/opt"
-    chown -R android opt/$pkgname
-    chgrp -R android opt/$pkgname
+    chmod g+rwX opt/${pkgname}
+    chown -R android opt/${pkgname}
+    chgrp -R users opt/${pkgname}
 }
