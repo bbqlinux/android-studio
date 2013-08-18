@@ -5,16 +5,16 @@
 
 pkgname=android-studio
 pkgver=0.2.5
-pkgrel=3
+pkgrel=4
 _build=130.737825
 _patch=130.782403
 pkgdesc="A new Android development environment based on IntelliJ IDEA."
 arch=(i686 x86_64)
 url="http://developer.android.com/sdk/installing/studio.html"
 license=('APACHE')
-depends=('python' 'fontconfig' 'mesa' 'libxrender' 'android-sdk')
+depends=('python' 'fontconfig' 'mesa' 'libxrender' 'android-sdk' 'android-sdk-platform-tools')
 makedepends=('unzip' 'xorg-server-xvfb' 'ttf-dejavu')
-optdepends=('android-sdk-platform-tools' 'android-sdk-build-tools')
+optdepends=('android-sdk-build-tools')
 options=('!strip')
 install=${pkgname}.install
 source=(http://dl.google.com/android/studio/android-studio-bundle-${_build}-linux.tgz
@@ -71,7 +71,7 @@ package() {
 
     # Fix permissions
     chmod -R ugo+rX "${pkgdir}/opt"
-    chmod g+rwX opt/${pkgname}
-    chown -R android opt/${pkgname}
-    chgrp -R users opt/${pkgname}
+    chmod g+rwX "${pkgdir}/opt/${pkgname}"
+    chown -R android "${pkgdir}/opt/${pkgname}"
+    chgrp -R users "${pkgdir}/opt/${pkgname}"
 }
